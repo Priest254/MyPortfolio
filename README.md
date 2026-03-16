@@ -104,78 +104,46 @@ ng test
 
 ## 🚀 Deploying to GitHub Pages
 
-### Option 1: Using GitHub Actions (Recommended)
+### Quick Start (Recommended - Automated)
 
-Create a `.github/workflows/build-and-deploy.yml` file:
-
-```yaml
-name: Build and Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build -- --configuration production
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist/portfolio'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+1. **Commit your changes:**
+```bash
+git add .
+git commit -m "Configure GitHub Pages deployment"
+git push origin main
 ```
 
-### Option 2: Manual Deployment
+2. **GitHub Actions will automatically:**
+   - Build your portfolio
+   - Deploy to GitHub Pages on every push to `main`
+   - Your site will be live at: `https://priest254.github.io/MyPortfolio/`
 
-1. **Build the project for production:**
+3. **Verify settings in GitHub repo:**
+   - Go to **Settings → Pages**
+   - Source: "Deploy from a branch"
+   - Branch: `gh-pages`
+   - Folder: `/ (root)`
+   - Wait 1-2 minutes for deployment
+
+### Manual Deployment (Alternative)
+
+If you prefer to deploy manually:
 
 ```bash
-npm run build -- --configuration production
+# 1. Build for production
+npm run build:gh-pages
+
+# 2. Verify build succeeded
+dir dist\portfolio
+
+# 3. Deploy to GitHub Pages
+npx gh-pages -d dist\portfolio
+
+# 4. Push to GitHub
+git add .
+git commit -m "Deploy to GitHub Pages"
+git push origin main
 ```
-
-2. **The build output will be in `dist/portfolio/`**
-
-3. **Push to GitHub Pages:**
-
-```bash
-# Install gh-pages
-npm install --save-dev gh-pages
-
-# Deploy (add to package.json scripts)
-npx gh-pages -d dist/portfolio
-```
-
-4. **In your GitHub repository settings:**
-   - Go to **Settings** → **Pages**
-   - Under "Source", select **Deploy from a branch**
-   - Select **gh-pages** branch and `/ (root)` folder
 
 ### Build Commands
 
@@ -183,12 +151,27 @@ npx gh-pages -d dist/portfolio
 # Development build
 npm run build
 
-# Production build (optimized)
-npm run build -- --configuration production
+# Production build (optimized for GitHub Pages)
+npm run build:gh-pages
 
 # Watch mode (rebuild on file changes)
 npm run watch
 ```
+
+### Troubleshooting
+
+**404 Error:**
+- Check that `baseHref` is set to `/MyPortfolio/` in `angular.json` (already configured)
+- Verify the `gh-pages` branch exists in your GitHub repo
+
+**CSP Script Errors:**
+- Already handled with correct Content Security Policy in `src/index.html`
+- The app uses safe inline scripts for Angular to work properly
+
+**Site not updating:**
+- GitHub Actions deployment can take 1-2 minutes
+- Check the "Actions" tab in your GitHub repo to see build status
+- Clear browser cache (Ctrl+Shift+Delete) or use incognito mode
 
 ## 📋 Key Components
 
