@@ -17,7 +17,7 @@ import { PERSONAL_DATA } from '../../data/personal.data';
             <div class="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 shrink-0">
               <div class="absolute inset-0 bg-gradient-to-tr from-purple-400 to-teal-500 rounded-[3rem] rotate-6 opacity-30 animate-pulse blur-lg"></div>
               <div class="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 rounded-[3rem] overflow-hidden border-4 border-white dark:border-zinc-900 shadow-2xl transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-600/30">
-                <img src="AN.jpeg" alt="Allan Nickson" class="w-full h-full object-cover" />
+                <img src="AN.webp" alt="Allan Nickson" decoding="async" class="w-full h-full object-cover" />
               </div>
             </div>
 

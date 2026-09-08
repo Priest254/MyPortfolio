@@ -11,7 +11,7 @@ import { LucideAngularModule } from 'lucide-angular';
     <div class="group relative flex flex-col h-full bg-white dark:bg-zinc-900 rounded-[2rem] border border-zinc-200/60 dark:border-zinc-800/60 overflow-hidden hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2 transition-all duration-500">
       <div class="aspect-[16/10] w-full overflow-hidden relative">
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <img [src]="project.imageUrl" [alt]="project.title" class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110" />
+        <img [src]="project.imageUrl" [alt]="project.title" loading="lazy" decoding="async" class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110" />
         <div class="absolute top-4 left-4 z-20">
           <span class="px-3 py-1 text-[10px] font-bold tracking-widest uppercase bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-white rounded-full backdrop-blur-md shadow-sm">
             {{ project.category }}
